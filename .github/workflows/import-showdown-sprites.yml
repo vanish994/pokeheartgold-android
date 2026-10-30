@@ -1,0 +1,34 @@
+name: Import Showdown sprites
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-sprites:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Import sprites
+        run: python3 tools/import_showdown_sprites.py
+
+      - name: Commit imported sprites
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/showdown
+          if git diff --cached --quiet; then
+            echo "No sprite changes."
+            exit 0
+          fi
+          git commit -m "Import selected Pokémon Showdown sprites"
+          git push
