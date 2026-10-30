@@ -15,9 +15,6 @@ sub/build/**
 .idea/
 cmake-build-debug/
 
-# VSCode folder
-.vscode/
-
 # "cmake.buildDirectory": "${workspaceFolder}/build-cmake-${buildType}"
 build-cmake-*
 
@@ -117,3 +114,7 @@ files/
 !/lib/syscall/
 *.nds
 *.srl
+
+# Pokémon Showdown sprites: downloaded locally by tools/import_showdown_sprites.py
+# and intentionally not committed to the repository.
+/assets/showdown/
